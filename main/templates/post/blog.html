@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Мой блог{{user.username}}{% endblock %}
+
+{% block content %}
+
+    <h1>Блог пользователя {{name}}</h1>
+    {% if posts %}
+        {% for el in posts %}
+            <div class="my_class card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;">
+                <div class="card-header">{{el.author}} <br> {{el.datetime}}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{el.title}}</h4>
+                    <p class="card-text">{{el.text}}</p>
+                </div>
+                <form method='post'>
+                    {% csrf_token %}
+                    <div class='card-header'><a href="delete/{{el.id}}">Удалить статью</a></div>
+                </form>
+            </div>
+        {% endfor %}        
+    {% else %}
+        <p> У пользователя нет записей </p>
+    {% endif %}
+    
+    {% if user.username == name %}
+        <a href="{% url 'post' name %}" class='btn'>Добавить пост</a>
+    {% endif %}
+    {% for i in sub %}
+        {{i.profile}}
+        {{i.subscribe}}
+    {% endfor %}
+{% endblock %}

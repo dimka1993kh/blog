@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление записи{% endblock %}
+
+{% block content %}
+ <div class='features'>
+        <h1>Форма по добавлению поста</h1>  
+        <form method='post'>
+            {% csrf_token %}
+            {%  for el in form %}
+                {{ el }} <br>
+            {% endfor %}
+            <span>{{error}}</span>
+            <button class='btn btn-success' type="submit">Добавить пост</button> 
+        </form>
+    </div>
+{% endblock %}

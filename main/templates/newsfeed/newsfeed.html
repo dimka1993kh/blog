@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Моя лента новостей{% endblock %}
+
+{% block content %}
+
+    <h1>Моя лента новостей (Пользователь {{user.username}})</h1>
+    {% if posts %}
+        {% for author in posts %}
+            {% for el in author %}
+                <div class="my_class card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;">
+                    <div class="card-header">{{el.author}} <br> {{el.datetime}}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{el.title}}</h4>
+                        <p class="card-text">{{el.text}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p> У пользователя нет записей </p>
+    {% endif %}
+{% endblock %}

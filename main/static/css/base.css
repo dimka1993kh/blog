@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    background: #88BDBC  ;
+}
+
+aside {
+    background: #254E58 ;
+    max-width: 300px;
+    padding: 2.5%;
+    height: 100vh;
+    color: #EDF5E1;
+    float: left;
+}
+
+aside ul {
+    list-style: none
+}
+
+aside ul a {
+    color: #EDF5E1;
+    display: block;
+    margin-top: 20px;
+}
+
+aside ul a:hover {
+    color: black;
+    text-decoration: none;
+    transform: scale(1.2);
+    transition: transform .6s ease;
+}
+
+main {
+    text-align: center;
+    width: 100%;
+    margin-top: 2.5%;
+}
+
+.btn-success, .btn-success a {
+    color: black;
+}
+
+.account {
+    display: flex;
+}
+
+.account a {
+    float: right;
+    padding-left: 25px;
+}
+
+nav {
+    margin-left: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #EDF5E1;
+    font-size: 16px;
+}
+
+.my_class {
+    max-width: 30%;
+    margin: 10px auto;
+    display: block!important;
+    background: #254E58!important;
+    color: #EDF5E1!important;
+
+}
+
+.user_blog {
+    display: flex;
+    width: 250px;
+}
+
+.user_blog a {
+    width: 120px;
+    text-align: center;
+    height: 40px;
+    margin: auto;
+}
+
+.unsubscribe {
+    background: black!important;
+}

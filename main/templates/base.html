@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <aside>
+        <h2>БЛОГика</h2>
+        <br>
+        {% if user.is_authenticated %}
+            <h4>Вы вошли как пользователь:</h4>
+            <div class='account'>
+                <p>{{user.username}}</p>
+                <a href="{% url 'logout' %}"> Выйти </a>
+            </div>
+            <nav>
+                <a href="{% url 'newsfeed' user.username %}"><p>Моя лента новостей</p></a>
+                <a href="{% url 'blog' user.username %}"><p>Мой Блог</p></a>
+                <a href=""><p>Мои Подписки</p></a>
+                <a href=""><p>Мои Подписчики</p></a>
+            </nav>
+        {% else %}
+            <a href="{% url 'login' %}"> Войти </a>
+        {% endif %}
+        <br>
+        <br>
+        <h4>Перейти на блог пользователя:</h4>
+        {% for i in data %}
+            {% if user.username %}
+                {% if i.username != user.username %}
+                    <div class='user_blog'>
+                            <a href="{% url 'blog' i.username %}">{{i.username}}</a>
+                            {% if subscribers %}
+                                {% if i.btn_title == 'Подписаться' %}
+                                    <a class= "btn {{i.btn_class}}" href="{% url 'subscribe' i.username %}">{{i.btn_title}}</a>
+                                {% elif i.btn_title == 'Отписаться' %}
+                                    <a class= "btn {{i.btn_class}}" href="{% url 'unsubscribe' i.username %}">{{i.btn_title}}</a>
+                                {% endif %}
+                            {% else %}
+                                <a class="btn btn-danger" href="{% url 'subscribe' i.username %}">Подписаться</a>
+                            {% endif %}
+                {% endif %}
+            {% else %}
+                            <p>{{i.username}}</p>
+            {% endif %}  
+                    </div>      
+        {% endfor %}
+    </aside>
+    <main>
+        {% if user.is_authenticated == False %}
+            <div  class="container">
+                <div  class="row justify-content-center">
+                    <div  class="col-4">
+                    <h1  class="text-center">Войдите для продолжения</h1>
+                        {% block main %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% block content %}{% endblock%}
+    </main>
+</body>
+</html>
+
+
